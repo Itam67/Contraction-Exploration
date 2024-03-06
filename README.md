@@ -1,4 +1,6 @@
 <a name="top"></a>
+# PLEASE OPEN WITH COLAB TO SEE FIGURES!!!
+
 # Quick Research Summary
 ## Preface
 *  This is a hackathon-esq notebook demonstraing how I go about analyzing model behaviors and interpret figures. I often set 10 hour limits when doing such searches as there may be other behaviors more worth while exploring!
