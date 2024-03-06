@@ -1,5 +1,5 @@
 <a name="top"></a>
-# PLEASE OPEN WITH COLAB TO SEE FIGURES!!!
+# Please View in Colab To See Figures!!!
 
 # Quick Research Summary
 ## Preface
