@@ -1,25 +1,25 @@
 <a name="top"></a>
-#Quick Research Summary
-##Preface
+# Quick Research Summary
+## Preface
 *  This is a hackathon-esq notebook demonstraing how I go about analyzing model behaviors and interpret figures. I often set 10 hour limits when doing such searches as there may be other behaviors more worth while exploring!
 *   Hopefully this notebook demonstrated my ability to analyze behaviors in the wild.
 *   Note: Under every chart linked in this summary there is a more thorough interpretation underneath the chart than what I provide in the summary.
 
 
-##Initial exploration
+## Initial exploration
   *   In playing around with GPT2-Small I noticed that it would repeat some grammatical patterns. The one I decided to focus on was using contractions that previously appeared in sentences.
       *   "We're helping our friend while they" predicts "'re" instead "are"
       *   "We are helping our friend while they" predicts "are" instead "'re"
   *   I also noticed that the model will (mostly) continue to use contractions even if the final contraction is distinct from the previously used one.
     *   "We're helping our friend while he" predicts 's instead "is" despite the previous contraction in the sentence being 're
 
-##Research Goal
+## Research Goal
 *   For one type of contraction earlier in the sentence paired with one terminating pronoun, how does the model know to predict the correct contraction?
 *   For several different contraction pronoun pairs, can I identify the model's mechanisms used to predict the final contraction?
 *   If I can do the above, can I compare the various mechanisms used to predict contractions? Are they the same? Are they different? If so how are they different? Do they use various parts of the same circuit?
 *   These questions are super exciting to me yet are probably too grand in scope for this application. I set out to make as much progress in answering these questions as I can while learning the tools of mechanistic interpretability.
 
-##Hypothesis
+## Hypothesis
 *   From purely thinking about what the model could be implementing, I think it is possible that the mechanism to do this task involves Bigram/trigram munging. Bigrams are when the model predicts the next token based on what is most likely to appear after exclusively the final token. Skip trigrams fare when the model sees some pattern "A...B" and then predicts C. I believe it is possible that the model looks at the pronoun at the end of the sentence, boosts verbs and verb contractions, and from the trigram with the earlier contraction token, boosts the correct contraction of verbs for that pronoun.
 *   I anticipate that the mechanisms used to do this are slightly different for various contraction pronoun pairs. I am very uncertain about this but my reasoning is that the model (in some contraction pairings) will be able to copy the previous contraction instead of relying only on the bigram with the pronoun at the end. I wonder if the model will favor copying information from the contraction in some cases or will just stick to the same general mechanism.
 
@@ -44,7 +44,7 @@
 *   For the MLP Layers there is slightly more variation in the later layers between the tasks. The differences between the experimental groups (largerly the use of L11 MLP) can be largely bundled into two groups categorized by what the predicted contraction should be. Within each group that chart looks largely similar. Again these differences are within a small range < 0.2 so may not be significant but are definitely interesting!
 
 
-#Wrap-up
+# Wrap-up
 *   As explained above, I believe that some of the observations suggest that maybe there is some trigram bigram munging happening to perform this task but I would be far from saying that I can reject any sort of null hypothesis.
 *   This emphasizes to me just how complicated and involved some of the processing this model is doing actually is. A good example is telling myself to keep looking into MLPs eventhough it seemed like L7 H11 provided a simple all encompassing solution. I am now certain the truthful circuit is far more involved than a simple attention pattern.
 
